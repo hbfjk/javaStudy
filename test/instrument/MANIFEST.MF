@@ -1,0 +1,4 @@
+Agent-Class: TestAgent
+Premain-Class: TestAgent
+Can-Redine-Classes: true
+Can-Retransform-Classes: true

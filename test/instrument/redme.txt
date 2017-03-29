@@ -1,0 +1,18 @@
+https://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html
+
+
+http://www.tuicool.com/articles/36je6bb
+
+
+cd /Users/fangjk/git/javaStudy/test/instrument
+javac TestAgent.java
+jar cvmf MANIFEST.MF agent.jar TestAgent.class
+javac TestMain.java
+java -javaagent:agent.jar TestMain
+
+//below steps are for dynamic attach from another VM
+javac Target.java
+java Target   // the pid of the current jvm is outputed
+//modify the pid and run the main method of Attach class
+
+
