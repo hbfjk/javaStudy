@@ -3,8 +3,15 @@ package test;
 public class Test {
 	
 	public static void main(String[] args) {
+		"key099".hashCode();
 		int r = 8 % 4;
-		System.out.println(r);
+		String key="key099";
+		int h;
+		System.out.println(key.hashCode());
+		System.out.println("key099".hashCode()>>>16);
+		int hash = (h = key.hashCode()) ^ (h >>> 16);
+		System.out.println(15 & hash);
+		System.out.println((h = key.hashCode()));
 	}
 
 //	public static void main(String[] args) {
