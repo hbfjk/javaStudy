@@ -1,0 +1,385 @@
+package test;
+
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionGroup;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
+public class ApacheCommonsCli2 {
+ 
+    public static final String FALCON_URL = "FALCON_URL"; 
+    public static final String URL_OPTION = "url"; 
+    public static final String VERSION_OPTION = "version"; 
+    public static final String STATUS_OPTION = "status"; 
+    public static final String ADMIN_CMD = "admin"; 
+    public static final String HELP_CMD = "help"; 
+    private static final String VERSION_CMD = "version"; 
+    private static final String STACK_OPTION = "stack"; 
+ 
+    public static final String ENTITY_CMD = "entity"; 
+    public static final String ENTITY_TYPE_OPT = "type"; 
+    public static final String COLO_OPT = "colo"; 
+    public static final String ENTITY_NAME_OPT = "name"; 
+    public static final String FILE_PATH_OPT = "file"; 
+    public static final String SUBMIT_OPT = "submit"; 
+    public static final String UPDATE_OPT = "update"; 
+    public static final String SCHEDULE_OPT = "schedule"; 
+    public static final String SUSPEND_OPT = "suspend"; 
+    public static final String RESUME_OPT = "resume"; 
+    public static final String DELETE_OPT = "delete"; 
+    public static final String SUBMIT_AND_SCHEDULE_OPT = "submitAndSchedule"; 
+    public static final String VALIDATE_OPT = "validate"; 
+    public static final String STATUS_OPT = "status"; 
+    public static final String SUMMARY_OPT = "summary"; 
+    public static final String DEFINITION_OPT = "definition"; 
+    public static final String DEPENDENCY_OPT = "dependency"; 
+    public static final String LIST_OPT = "list"; 
+    public static final String TOUCH_OPT = "touch"; 
+ 
+    public static final String INSTANCE_CMD = "instance"; 
+    public static final String START_OPT = "start"; 
+    public static final String END_OPT = "end"; 
+    public static final String RUNNING_OPT = "running"; 
+    public static final String KILL_OPT = "kill"; 
+    public static final String RERUN_OPT = "rerun"; 
+    public static final String CONTINUE_OPT = "continue"; 
+    public static final String LOG_OPT = "logs"; 
+    public static final String RUNID_OPT = "runid"; 
+    public static final String CLUSTERS_OPT = "clusters"; 
+    public static final String SOURCECLUSTER_OPT = "sourceClusters"; 
+    public static final String CURRENT_COLO = "current.colo"; 
+    public static final String CLIENT_PROPERTIES = "/client.properties"; 
+    public static final String LIFECYCLE_OPT = "lifecycle"; 
+    public static final String PARARMS_OPT = "params"; 
+    public static final String LISTING_OPT = "listing"; 
+ 
+    // Graph Commands 
+    public static final String GRAPH_CMD = "graph"; 
+    public static final String VERTEX_CMD = "vertex"; 
+    public static final String VERTICES_CMD = "vertices"; 
+    public static final String VERTEX_EDGES_CMD = "edges"; 
+ 
+    // Graph Command Options 
+    public static final String EDGE_CMD = "edge"; 
+    public static final String ID_OPT = "id"; 
+    public static final String KEY_OPT = "key"; 
+    public static final String VALUE_OPT = "value"; 
+    public static final String DIRECTION_OPT = "direction"; 
+ 
+    /**
+     * Entry point for the Falcon CLI when invoked from the command line. Upon 
+     * completion this method exits the JVM with '0' (success) or '-1' 
+     * (failure). 
+     * 
+     * @param args options and arguments for the Falcon CLI. 
+     */ 
+    public static void main(final String[] args) throws Exception {
+    	String[] helpArgs = {"help"};
+        new ApacheCommonsCli2().run(helpArgs);
+        
+        String[] adminArgs = {"admin"};
+        new ApacheCommonsCli2().run(adminArgs);
+    } 
+ 
+    // TODO help and headers 
+    private static final String[] FALCON_HELP = { "the env variable '" + FALCON_URL 
+                                                          + "' is used as default value for the '-" + URL_OPTION 
+                                                          + "' option", 
+                                                  "custom headers for Falcon web services can be specified using '-D", }; 
+    /**
+     * Run a CLI programmatically. 
+     * <p/> 
+     * It does not exit the JVM. 
+     * <p/> 
+     * A CLI instance can be used only once. 
+     * 
+     * @param args options and arguments for the Oozie CLI. 
+     * @return '0' (success), '-1' (failure). 
+     */ 
+    public synchronized int run(final String[] args) { 
+ 
+        CLIParser parser = new CLIParser("falcon", FALCON_HELP); 
+ 
+        parser.addCommand(ADMIN_CMD, "", "admin operations", createAdminOptions(), true); 
+        parser.addCommand(HELP_CMD, "", "display usage", new Options(), false); 
+        parser.addCommand(VERSION_CMD, "", "show client version", new Options(), false); 
+        parser.addCommand(ENTITY_CMD, 
+                "", 
+                "Entity operations like submit, suspend, resume, delete, status, definition, submitAndSchedule", 
+                entityOptions(), false); 
+        parser.addCommand(INSTANCE_CMD, 
+                "", 
+                "Process instances operations like running, status, kill, suspend, resume, rerun, logs", 
+                instanceOptions(), false); 
+        parser.addCommand(GRAPH_CMD, "", "graph operations", createGraphOptions(), true); 
+ 
+        try { 
+            CLIParser.Command command = parser.parse(args); 
+            
+            int exitValue = 0; 
+            if (command.getName().equals(HELP_CMD)) { 
+                parser.showHelp(); 
+            } else { 
+                if (command.getName().equals(ADMIN_CMD)) {
+                	System.out.println("runnig " + ADMIN_CMD);
+                } else if (command.getName().equals(ENTITY_CMD)) { 
+                	System.out.println("runnig " + ENTITY_CMD);
+                } else if (command.getName().equals(INSTANCE_CMD)) { 
+                	System.out.println("runnig " + INSTANCE_CMD);
+                } else if (command.getName().equals(GRAPH_CMD)) { 
+                	System.out.println("runnig " + GRAPH_CMD);
+                } 
+            } 
+ 
+            return exitValue; 
+        } catch (ParseException ex) {
+        	ex.printStackTrace();
+            return -1; 
+        } catch (Exception ex) { 
+        	ex.printStackTrace();
+            return -1; 
+        } 
+    }
+ 
+ 
+    private Options createAdminOptions() { 
+        Options adminOptions = new Options(); 
+        Option url = new Option(URL_OPTION, true, "Falcon URL"); 
+        adminOptions.addOption(url); 
+ 
+        OptionGroup group = new OptionGroup(); 
+        Option status = new Option(STATUS_OPTION, false, 
+                "show the current system status"); 
+        Option version = new Option(VERSION_OPTION, false, 
+                "show Falcon server build version"); 
+        Option stack = new Option(STACK_OPTION, false, 
+                "show the thread stack dump"); 
+        Option help = new Option("help", false, "show Falcon help"); 
+        group.addOption(status); 
+        group.addOption(version); 
+        group.addOption(stack); 
+        group.addOption(help); 
+ 
+        adminOptions.addOptionGroup(group); 
+        return adminOptions; 
+    } 
+ 
+    private Options entityOptions() { 
+ 
+        Options entityOptions = new Options(); 
+ 
+        Option submit = new Option(SUBMIT_OPT, false, 
+                "Submits an entity xml to Falcon"); 
+        Option update = new Option(UPDATE_OPT, false, 
+                "Updates an existing entity xml"); 
+        Option schedule = new Option(SCHEDULE_OPT, false, 
+                "Schedules a submited entity in Falcon"); 
+        Option suspend = new Option(SUSPEND_OPT, false, 
+                "Suspends a running entity in Falcon"); 
+        Option resume = new Option(RESUME_OPT, false, 
+                "Resumes a suspended entity in Falcon"); 
+        Option delete = new Option(DELETE_OPT, false, 
+                "Deletes an entity in Falcon, and kills its instance from workflow engine"); 
+        Option submitAndSchedule = new Option(SUBMIT_AND_SCHEDULE_OPT, false, 
+                "Submits and entity to Falcon and schedules it immediately"); 
+        Option validate = new Option(VALIDATE_OPT, false, 
+                "Validates an entity based on the entity type"); 
+        Option status = new Option(STATUS_OPT, false, 
+                "Gets the status of entity"); 
+        Option definition = new Option(DEFINITION_OPT, false, 
+                "Gets the Definition of entity"); 
+        Option dependency = new Option(DEPENDENCY_OPT, false, 
+                "Gets the dependencies of entity"); 
+        Option list = new Option(LIST_OPT, false, 
+                "List entities registerd for a type"); 
+        Option touch = new Option(TOUCH_OPT, false, 
+                "Force update the entity in workflow engine(even without any changes to entity)"); 
+ 
+        OptionGroup group = new OptionGroup(); 
+        group.addOption(submit); 
+        group.addOption(update); 
+        group.addOption(schedule); 
+        group.addOption(suspend); 
+        group.addOption(resume); 
+        group.addOption(delete); 
+        group.addOption(submitAndSchedule); 
+        group.addOption(validate); 
+        group.addOption(status); 
+        group.addOption(definition); 
+        group.addOption(dependency); 
+        group.addOption(list); 
+        group.addOption(touch); 
+ 
+        Option url = new Option(URL_OPTION, true, "Falcon URL"); 
+        Option entityType = new Option(ENTITY_TYPE_OPT, true, 
+                "Entity type, can be cluster, feed or process xml"); 
+        entityType.setRequired(true); 
+        Option filePath = new Option(FILE_PATH_OPT, true, 
+                "Path to entity xml file"); 
+        Option entityName = new Option(ENTITY_NAME_OPT, true, 
+                "Entity type, can be cluster, feed or process xml"); 
+        Option colo = new Option(COLO_OPT, true, 
+                "Colo name"); 
+        colo.setRequired(false); 
+ 
+        entityOptions.addOption(url); 
+        entityOptions.addOptionGroup(group); 
+        entityOptions.addOption(entityType); 
+        entityOptions.addOption(entityName); 
+        entityOptions.addOption(filePath); 
+        entityOptions.addOption(colo); 
+ 
+        return entityOptions; 
+    } 
+ 
+    private Options instanceOptions() { 
+ 
+        Options instanceOptions = new Options(); 
+ 
+        Option running = new Option(RUNNING_OPT, false, 
+                "Gets running process instances for a given process"); 
+        Option status = new Option( 
+                STATUS_OPT, 
+                false, 
+                "Gets status of process instances for a given process in the range start time and optional end time"); 
+        Option summary = new Option( 
+                SUMMARY_OPT, 
+                false, 
+                "Gets summary of instances for a given process in the range start time and optional end time"); 
+        Option kill = new Option( 
+                KILL_OPT, 
+                false, 
+                "Kills active process instances for a given process in the range start time and optional end time"); 
+        Option suspend = new Option( 
+                SUSPEND_OPT, 
+                false, 
+                "Suspends active process instances for a given process in the range start time and optional end time"); 
+        Option resume = new Option( 
+                RESUME_OPT, 
+                false, 
+                "Resumes suspended process instances for a given process " 
+                        + "in the range start time and optional end time"); 
+        Option rerun = new Option( 
+                RERUN_OPT, 
+                false, 
+                "Reruns process instances for a given process in the range start time and " 
+                        + "optional end time and overrides properties present in job.properties file"); 
+ 
+        Option continues = new Option( 
+                CONTINUE_OPT, 
+                false, 
+                "resume process instance execution for a given process in the range start time and " 
+                        + "optional end time and overrides properties present in job.properties file"); 
+ 
+        Option logs = new Option( 
+                LOG_OPT, 
+                false, 
+                "Logs print the logs for process instances for a given process in " 
+                        + "the range start time and optional end time"); 
+ 
+        Option params = new Option( 
+                PARARMS_OPT, 
+                false, 
+                "Displays the workflow parameters for a given instance of specified nominal time"); 
+ 
+        Option listing = new Option( 
+                LISTING_OPT, 
+                false, 
+                "Displays feed listing and their status between a start and end time range."); 
+ 
+        OptionGroup group = new OptionGroup(); 
+        group.addOption(running); 
+        group.addOption(status); 
+        group.addOption(summary); 
+        group.addOption(kill); 
+        group.addOption(resume); 
+        group.addOption(suspend); 
+        group.addOption(resume); 
+        group.addOption(rerun); 
+        group.addOption(logs); 
+        group.addOption(continues); 
+        group.addOption(params); 
+        group.addOption(listing); 
+ 
+        Option url = new Option(URL_OPTION, true, "Falcon URL"); 
+        Option start = new Option(START_OPT, true, 
+                "Start time is required for commands, status, kill, suspend, resume and re-run" 
+                        + "and it is nominal time while displaying workflow params"); 
+        Option end = new Option( 
+                END_OPT, 
+                true, 
+                "End time is optional for commands, status, kill, suspend, resume and re-run; " 
+                        + "if not specified then current time is considered as end time"); 
+        Option runid = new Option(RUNID_OPT, true, 
+                "Instance runid  is optional and user can specify the runid, defaults to 0"); 
+        Option clusters = new Option(CLUSTERS_OPT, true, 
+                "clusters is optional for commands kill, suspend and resume, " 
+                        + "should not be specified for other commands"); 
+        Option sourceClusters = new Option(SOURCECLUSTER_OPT, true, 
+                " source cluster is optional for commands kill, suspend and resume, " 
+                        + "should not be specified for other commands (required for only feed)"); 
+        Option filePath = new Option( 
+                FILE_PATH_OPT, 
+                true, 
+                "Path to job.properties file is required for rerun command, " 
+                        + "it should contain name=value pair for properties to override for rerun"); 
+        Option entityType = new Option(ENTITY_TYPE_OPT, true, 
+                "Entity type, can be feed or process xml"); 
+        Option entityName = new Option(ENTITY_NAME_OPT, true, 
+                "Entity name, can be feed or process name"); 
+        Option colo = new Option(COLO_OPT, true, 
+                "Colo on which the cmd has to be executed"); 
+        Option lifecycle = new Option(LIFECYCLE_OPT, 
+                true, 
+                "describes life cycle of entity , for feed it can be replication/retention " 
+                       + "and for process it can be execution"); 
+ 
+        instanceOptions.addOption(url); 
+        instanceOptions.addOptionGroup(group); 
+        instanceOptions.addOption(start); 
+        instanceOptions.addOption(end); 
+        instanceOptions.addOption(filePath); 
+        instanceOptions.addOption(entityType); 
+        instanceOptions.addOption(entityName); 
+        instanceOptions.addOption(runid); 
+        instanceOptions.addOption(clusters); 
+        instanceOptions.addOption(sourceClusters); 
+        instanceOptions.addOption(colo); 
+        instanceOptions.addOption(lifecycle); 
+ 
+        return instanceOptions; 
+    } 
+ 
+    private Options createGraphOptions() { 
+        Options graphOptions = new Options(); 
+        Option url = new Option(URL_OPTION, true, "Falcon URL"); 
+        graphOptions.addOption(url); 
+ 
+        Option vertex = new Option(VERTEX_CMD, false, "show the vertices"); 
+        Option vertices = new Option(VERTICES_CMD, false, "show the vertices"); 
+        Option vertexEdges = new Option(VERTEX_EDGES_CMD, false, "show the edges for a given vertex"); 
+        Option edges = new Option(EDGE_CMD, false, "show the edges"); 
+ 
+        OptionGroup group = new OptionGroup(); 
+        group.addOption(vertex); 
+        group.addOption(vertices); 
+        group.addOption(vertexEdges); 
+        group.addOption(edges); 
+        graphOptions.addOptionGroup(group); 
+ 
+        Option id = new Option(ID_OPT, true, "vertex or edge id"); 
+        graphOptions.addOption(id); 
+ 
+        Option key = new Option(KEY_OPT, true, "key property"); 
+        graphOptions.addOption(key); 
+ 
+        Option value = new Option(VALUE_OPT, true, "value property"); 
+        graphOptions.addOption(value); 
+ 
+        Option direction = new Option(DIRECTION_OPT, true, "edge direction property"); 
+        graphOptions.addOption(direction); 
+ 
+        return graphOptions; 
+    } 
+
+}

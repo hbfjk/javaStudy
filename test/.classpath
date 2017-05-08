@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="/Users/fangjk/IBM/bpm8570/AppServer/Lombardi/lib/castor.jar"/>
 	<classpathentry kind="lib" path="/Users/fangjk/IBM/bpm856/AppServer/java_1.7_64/jre/lib/xml.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/lib/tools.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli-1.4/commons-cli-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli-1.4/commons-cli-1.4.jar" sourcepath="lib/commons-cli-1.4/commons-cli-1.4-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
