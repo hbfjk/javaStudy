@@ -3,6 +3,11 @@ package java8.map;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 从1.8开始，一些集合类实现了函数式接口
+ * @author fangjk
+ *
+ */
 public class MapTest {
 
 	public static void main(String[] args) {

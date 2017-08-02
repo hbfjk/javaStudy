@@ -1,0 +1,16 @@
+http://www.jfrogchina.com/support-service/training-free-artifactory/
+
+使用 Jenkins 与 Artifactory 实现 CI/CD 流水线 
+http://haurqb42j0gnc7zyxam.exp.bcevod.com/mda-heje5pwh5mrdhwss/mda-heje5pwh5mrdhwss.mp4
+
+下一代开源 Maven 私服 - Artifactory开源版 
+http://haurqb42j0gnc7zyxam.exp.bcevod.com/mda-hecjrfjkn5xcahwy/mda-hecjrfjkn5xcahwy.mp4
+
+生产环境跑 Docker 的最佳实践 
+http://haurqb42j0gnc7zyxam.exp.bcevod.com/mda-heshujyxe1bujxmm/mda-heshujyxe1bujxmm.mp4
+
+在大型企业中主导 DevOps 变革是一种什么体验？
+http://haurqb42j0gnc7zyxam.exp.bcevod.com/mda-hezevda2drf0dncw/mda-hezevda2drf0dncw.mp4
+
+下一代 Java 私服 - Artifactory开源版在线课堂
+http://haurqb42j0gnc7zyxam.exp.bcevod.com/mda-hfbfi1rauv6h5734/mda-hfbfi1rauv6h5734.mp4

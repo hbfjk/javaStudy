@@ -12,8 +12,8 @@ public class ComparatorTest {
 		Person p1 = new Person("John", "Doe");
 		Person p2 = new Person("Alice", "Wonderland");
 		 
-		System.out.println(comparator.compare(p1, p2));             // > 0
-		System.out.println(comparator.reversed().compare(p1, p2));  // < 0
+		System.out.println(comparator.compare(p1, p2));             // 输出9
+		System.out.println(comparator.reversed().compare(p1, p2));  // 输出-9
 
 	}
 

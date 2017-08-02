@@ -2,11 +2,27 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="instrument"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<accessrules>
+			<accessrule kind="accessible" pattern="**"/>
+		</accessrules>
+	</classpathentry>
 	<classpathentry kind="lib" path="/Users/fangjk/IBM/bpm8570/AppServer/Lombardi/lib/castor.jar"/>
 	<classpathentry kind="lib" path="/Users/fangjk/IBM/bpm856/AppServer/java_1.7_64/jre/lib/xml.jar"/>
-	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/lib/tools.jar"/>
+	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/lib/tools.jar" sourcepath="lib/langtools-4fa835472e3c.zip"/>
 	<classpathentry kind="lib" path="lib/commons-cli-1.4/commons-cli-1.4-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-cli-1.4/commons-cli-1.4.jar" sourcepath="lib/commons-cli-1.4/commons-cli-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="lib/netty-all-4.1.11.Final-sources.jar"/>
+	<classpathentry kind="lib" path="lib/netty-all-4.1.11.Final.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/zookeeper-3.5.2-alpha.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/curator-client-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/curator-framework-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/curator-recipes-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/guava-20.0-hal.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="lib/zookeeper/zkclient-0.1.jar"/>
+	<classpathentry kind="lib" path="lib/test-toolkit-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

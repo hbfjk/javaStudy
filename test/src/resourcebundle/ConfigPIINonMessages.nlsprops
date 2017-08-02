@@ -1,0 +1,69 @@
+# BEGIN COPYRIGHT
+#*************************************************************************
+# IBM Confidential
+# OCO Source Materials
+# 5725-C94, 5725-C95, 5725-C96
+# (C) Copyright IBM Corporation 2015.
+# The source code for this program is not published or otherwise
+# divested of its trade secrets, irrespective of what has been
+# deposited with the U.S. Copyright Office.
+#*************************************************************************
+# END COPYRIGHT
+#
+# Keywords:
+#
+#CMVCPATHNAME ATLAS/ws/code/bpm.config/src/main/resources/com/ibm/bpm/config/resources/ConfigPIINonMessages.nlsprops
+#ISMESSAGEFILE FALSE
+#NLS_ENCODING=ESCAPED_UNICODE
+#NLS_MESSAGEFORMAT_VAR
+#
+
+# ==================================================================================================
+# BPMFPSCONFIG_* : General BPMPFSConfig messages
+# ==================================================================================================
+BPMPFSConfig_LOGFILE=Logging to file {0}.
+
+# ==================================================================================================
+# BPMPFSConfig_CONFIG_* : Configuration related messages
+# ==================================================================================================
+BPMPFSConfig_CONFIG_ACTION=Action: {0}
+BPMPFSConfig_CONFIG_TYPE=Type: {0}
+# {0}: file path
+BPMPFSConfig_CONFIG_INPUT_CONFIG_FILE=Type configuration file: {0}.
+
+# ==================================================================================================
+# BPMPFSConfig_CLI_* : Command Line Text
+# ==================================================================================================
+BPMPFSConfig_CLI_INVALID_SYNTAX=The command-line syntax is not correct. Refer to the usage information.
+
+# {0}: option name
+BPMPFSConfig_CLI_OPTION_MISSING=The -{0} command-line option is required but was not specified.
+# {0}: option name
+BPMPFSConfig_CLI_OPTION_NOT_ACCEPT_VALUE=The -{0} command-line option does not accept a value.
+# {0}: option name
+BPMPFSConfig_CLI_OPTION_VALUE_MISSING=The -{0} command-line option requires a value.
+# {0}: option name, {1}: valid option values
+BPMPFSConfig_CLI_OPTION_VALUE_INVALID=An invalid value for the -{0} command-line option was specified. The valid values are: {1}.
+
+# {0}: general syntax for the command, or detailed syntax for an individual action
+BPMPFSConfig_CLI_USAGE=Usage: {0}
+# {0}: script name, e.g. BPMPFSConfig.bat, BPMPFSConfig.sh
+BPMPFSConfig_CLI_HEADER_ALL=Usage information for the BPMPFSConfig command. To see complete usage information for an action, run {0} -help <actionName>.
+# {0}: action name, e.g. create, delete
+BPMPFSConfig_CLI_HEADER_INDIVIDUAL=Usage information for the BPMPFSConfig -{0} action:
+# {0}: command line arguments, e.g. -create -de
+BPMPFSConfig_CLI_FOOTER=The specified command-line syntax was {0}.
+
+BPMPFSConfig_CLI_DE_DESCRIPTION=Configures the deployment environment modeled in the configuration file.
+BPMPFSConfig_CLI_PFS_SERVER_DESCRIPTION=Configures the process federation server modeled in the configuration file.
+BPMPFSConfig_CLI_BPM_SERVER_DESCRIPTION=Configures the bpm server in the configuration file.
+BPMPFSConfig_CLI_SERVER_NAME_DESCRIPTION=Defines the name of the process federation server that should be configured.
+
+BPMPFSConfig_CLI_CREATE_DESCRIPTION=Creates IBM BPM artifacts, such as profiles or a deployment environment configuration.
+
+BPMPFSConfig_CLI_HELP_DESCRIPTION=Displays usage information for the command or specified action.
+
+# {0}: command line syntax of the action that was run
+BPMPFSConfig_CLI_SUCCESS=The ''{0}'' command completed successfully.
+# {0}: command line syntax of the action that was run, {1}: log file location
+BPMPFSConfig_CLI_FAILURE=The ''{0}'' command failed. For more information, see the log file {1}.

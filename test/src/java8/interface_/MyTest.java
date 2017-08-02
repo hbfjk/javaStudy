@@ -1,5 +1,10 @@
 package java8.interface_;
 
+/**
+ * 1.8开始，接口中可以定义默认方法和静态方法
+ * @author fangjk
+ *
+ */
 public class MyTest {
 
 	public static void main(String[] args) {
