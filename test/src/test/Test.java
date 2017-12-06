@@ -2,6 +2,7 @@ package test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -12,6 +13,9 @@ import Utils.Printer;
 public class Test {
 	
 	public static void main(String[] args) {
+		
+		String arraysToString = Arrays.toString(new String[]{"1","2"});
+		Printer.print(arraysToString);
 		
 		File file = new File("/opt");
 		if(file.exists()) {
